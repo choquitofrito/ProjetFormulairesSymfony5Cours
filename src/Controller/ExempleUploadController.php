@@ -28,11 +28,11 @@ class ExempleUploadController extends AbstractController
         );
 
         $formulairePays->handleRequest($request);
-        
-        if ($formulairePays->isSubmitted() && $formulairePays->isValid()){
-        
 
-        
+        if ($formulairePays->isSubmitted() && $formulairePays->isValid()) {
+
+
+
             // manque getData???
 
             // traiter le formulaire
@@ -43,25 +43,18 @@ class ExempleUploadController extends AbstractController
             // générer un nom unique de fichier
             // ex: 4342KL345K.txt
             $nomFichierServeur = md5(uniqid()) . "." . $fichier->guessExtension();
-            $fichier->move ('dossierFichiers', $nomFichierServeur);
-            
+            $fichier->move('dossierFichiers', $nomFichierServeur);
+
             // stocker dans la BD
             $em = $this->getDoctrine()->getManager();
-            $pays->setLien ($nomFichierServeur);
+            $pays->setLien($nomFichierServeur);
             $em->persist($pays);
             $em->flush();
 
-            return new Response ("Fichier enregistré");
-            
-
-
-        }
-        else {
+            return new Response("Fichier enregistré");
+        } else {
             // afficher le formulaire
-            return $this->render('exemple_upload/exemple.html.twig', ['formulaire'=>$formulairePays->createView()]);
+            return $this->render('exemple_upload/exemple.html.twig', ['formulaire' => $formulairePays->createView()]);
         }
-
-
-        
     }
 }
