@@ -14,7 +14,6 @@ class FormulairesController extends AbstractController
     public function afficherFormulaire()
     {
         return $this->render('formulaires/afficher_formulaire.html.twig');
-
     }
 
     /**
@@ -22,11 +21,23 @@ class FormulairesController extends AbstractController
      */
     public function traitementFormulaire(Request $req)
     {
-        
-        //dd($req);
-        //dd ($req->request->get('nom'));
-        dd ($req->query->get('nom'));
+        //dd ($req);  
+        //dd ($req->request)
+        // à choisir!!
 
-        return $this->render('formulaires/traitement_formulaire.html.twig');
+        // on obtient les données du formulaire
+        $nom = $req->request->get('nom'); // $nom = $_POST['nom'] 
+        $age = $req->request->get('age');
+
+        // s'il s'agit d'un GET: 
+        // $nom = $req->query->get('nom');  // $nom = $_GET['nom']
+
+        return $this->render(
+            'formulaires/traitement_formulaire.html.twig',
+            [
+                'nom' => $nom,
+                'age' => $age
+            ]
+        );
     }
 }

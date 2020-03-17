@@ -4,7 +4,7 @@
 
 {% block body %}
 tout va bien, on va afficher un form
-<form action="{{ path ('traitement_formulaire') }}" method="GET">
+<form action="{{ path ('traitement_formulaire') }}" method="POST">
     nom<input type="text" name="nom">
     age<input type="number" name="age">
     <button type="submit">Envoyer</button>
