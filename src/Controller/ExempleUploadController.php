@@ -1,0 +1,57 @@
+<?php
+
+namespace App\Controller;
+
+use App\Entity\Pays;
+use App\Form\PaysType;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+class ExempleUploadController extends AbstractController
+{
+    /**
+     * @Route("/exemple/upload/exemple", name="exemple_upload")
+     */
+    public function exemple(Request $request)
+    {
+        $pays = new Pays();
+
+        $formulairePays = $this->createForm(
+            PaysType::class,
+            $pays,
+            [
+                'method' => 'POST',
+                'action' => $this->generateUrl("exemple_upload")
+            ]
+        );
+
+        $formulairePays->handleRequest($request);
+
+        
+        if ($formulairePays->isSubmitted() && $formulairePays->isValid()){
+        
+            // manque getData???
+
+            // traiter le formulaire
+
+            // obtenir le fichier (objet)
+            $fichier = $pays->getLien();
+
+            // générer un nom unique de fichier
+            // ex: 4342KL345K.txt
+            $nomFichierServeur = md5(uniqid()) . "." . $fichier->guessExtension();
+            $fichier->move ('dossierFichiers', $nomFichierServeur);
+            
+            dd ($pays);
+
+        }
+        else {
+            // afficher le formulaire
+            return $this->render('exemple_upload/exemple.html.twig', ['formulaire'=>$formulairePays->createView()]);
+        }
+
+
+        
+    }
+}
