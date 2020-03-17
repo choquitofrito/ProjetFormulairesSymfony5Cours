@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Pays;
 use App\Form\PaysType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -43,7 +44,15 @@ class ExempleUploadController extends AbstractController
             $nomFichierServeur = md5(uniqid()) . "." . $fichier->guessExtension();
             $fichier->move ('dossierFichiers', $nomFichierServeur);
             
-            dd ($pays);
+            // stocker dans la BD
+            $em = $this->getDoctrine()->getManager();
+            $pays->setLien ($nomFichierServeur);
+            $em->persist($pays);
+            $em->flush();
+
+            return new Response ("Fichier enregistré");
+            
+
 
         }
         else {
