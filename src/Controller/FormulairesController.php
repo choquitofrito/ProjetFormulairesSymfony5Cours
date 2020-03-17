@@ -79,7 +79,6 @@ class FormulairesController extends AbstractController
      * @Route ("/formulaires/aeroport/afficher/traiter", name="aeroport_afficher_traiter")
      */
     public function aeroportAfficherTraiter (Request $request){
-
         // 1. Créer et afficher le formulaire
         // créer le formulaire    
         $aeroport = new Aeroport();
@@ -99,14 +98,25 @@ class FormulairesController extends AbstractController
 
         // si submit on doit traiter le formulaire
         if ($formAeroport->isSubmitted() && $formAeroport->isValid()){
-            dd ($request->request);
+
+            
+            $nom = $request->request->get ('nom');
+            $code = $request->request->get ('code');
+
+            return $this->render ('/formulaires/aeroport_traitement_formulaire.html.twig',
+                []);
+        }
+        // pour le reste de cas, on doit simplement afficher le formulaire
+        else {
+            return $this->render(
+                '/formulaires/aeroport_afficher_formulaire.html.twig',
+                ['leFormulaire' => $formAeroport->createView()]
+            );
+
         }
 
 
-        return $this->render(
-            '/formulaires/aeroport_afficher_formulaire.html.twig',
-            ['leFormulaire' => $formAeroport->createView()]
-        );
+        
 
 
         // 2. Traiter le formulaire
