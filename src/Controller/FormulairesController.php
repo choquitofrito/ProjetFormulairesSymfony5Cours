@@ -84,8 +84,6 @@ class FormulairesController extends AbstractController
         // 1. Créer et afficher le formulaire
         // créer le formulaire    
         $aeroport = new Aeroport();
-        //$aeroport->setNom ("SVQ");
-        //$aeroport->setCode ("435345345");
 
         $formAeroport = $this->createForm(
             AeroportType::class,
@@ -115,12 +113,5 @@ class FormulairesController extends AbstractController
                 ['leFormulaire' => $formAeroport->createView()]
             );
         }
-
-
-
-
-
-        // 2. Traiter le formulaire
-
     }
 }
