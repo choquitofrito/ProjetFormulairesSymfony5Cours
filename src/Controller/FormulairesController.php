@@ -69,22 +69,24 @@ class FormulairesController extends AbstractController
     /**
      * @Route ("/formulaires/traitement/formulaire/aeroport", name="traitement_formulaire_aeroport")
      */
-    public function traitementFormulaireAeroport(){
+    public function traitementFormulaireAeroport()
+    {
 
-        return new Response ("traitement");
+        return new Response("traitement");
     }
 
 
     /**
      * @Route ("/formulaires/aeroport/afficher/traiter", name="aeroport_afficher_traiter")
      */
-    public function aeroportAfficherTraiter (Request $request){
+    public function aeroportAfficherTraiter(Request $request)
+    {
         // 1. Créer et afficher le formulaire
         // créer le formulaire    
         $aeroport = new Aeroport();
         //$aeroport->setNom ("SVQ");
         //$aeroport->setCode ("435345345");
-        
+
         $formAeroport = $this->createForm(
             AeroportType::class,
             $aeroport,
@@ -97,14 +99,14 @@ class FormulairesController extends AbstractController
         $formAeroport->handleRequest($request);
 
         // si submit on doit traiter le formulaire
-        if ($formAeroport->isSubmitted() && $formAeroport->isValid()){
-
-            
-            $nom = $request->request->get ('nom');
-            $code = $request->request->get ('code');
-
-            return $this->render ('/formulaires/aeroport_traitement_formulaire.html.twig',
-                []);
+        if ($formAeroport->isSubmitted() && $formAeroport->isValid()) {
+            $aeroport = $formAeroport->getData();
+            return $this->render(
+                '/formulaires/aeroport_traitement_formulaire.html.twig',
+                [
+                    'aeroport' => $aeroport
+                ]
+            );
         }
         // pour le reste de cas, on doit simplement afficher le formulaire
         else {
@@ -112,19 +114,13 @@ class FormulairesController extends AbstractController
                 '/formulaires/aeroport_afficher_formulaire.html.twig',
                 ['leFormulaire' => $formAeroport->createView()]
             );
-
         }
 
 
-        
+
 
 
         // 2. Traiter le formulaire
 
     }
-
-
-
-
-    
 }
