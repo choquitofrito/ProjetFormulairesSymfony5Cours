@@ -1,0 +1,8 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+{{ form_start (leFormulaire) }}
+{{ form_widget (leFormulaire) }}
+<input type="submit" value="Envoyer">
+{{ form_end (leFormulaire) }}
+{% endblock %}

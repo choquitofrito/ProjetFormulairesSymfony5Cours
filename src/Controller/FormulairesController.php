@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Form\AeroportType;
 use Symfony\Component\HttpFoundation\Request;
+
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -40,4 +43,33 @@ class FormulairesController extends AbstractController
             ]
         );
     }
+
+    /**
+     * @Route ("/formulaires/afficher/formulaire/aeroport")
+     */
+    public function afficherFormulaireAeroport()
+    {
+        // créer le formulaire        
+        $formAeroport = $this->createForm(
+            AeroportType::class,
+            null,
+            [
+                'method' => 'POST',
+                'action' => $this->generateUrl("traitement_formulaire_aeroport")
+
+            ]
+        );
+        return $this->render(
+            '/formulaires/afficher_formulaire_aeroport.html.twig',
+            ['leFormulaire' => $formAeroport->createView()]
+        );
+    }
+
+    /**
+     * @Route ("/formulaires/traitement/formulaire/aeroport", name="traitement_formulaire_aeroport")
+     */
+    public function traitementFormulaireAeroport(){
+        return new Response ("traitement");
+    }
+    
 }
