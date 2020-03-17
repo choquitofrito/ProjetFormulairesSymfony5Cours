@@ -69,7 +69,39 @@ class FormulairesController extends AbstractController
      * @Route ("/formulaires/traitement/formulaire/aeroport", name="traitement_formulaire_aeroport")
      */
     public function traitementFormulaireAeroport(){
+
         return new Response ("traitement");
     }
+
+
+    /**
+     * @Route ("/formulaires/aeroport/afficher/traiter", name="aeroport_afficher_traiter")
+     */
+    public function aeroportAfficherTraiter (){
+
+        // 1. Créer et afficher le formulaire
+        // créer le formulaire        
+        $formAeroport = $this->createForm(
+            AeroportType::class,
+            null,
+            [
+                'method' => 'POST',
+                'action' => $this->generateUrl("aeroport_afficher_traiter")
+
+            ]
+        );
+        return $this->render(
+            '/formulaires/aeroport_afficher_formulaire.html.twig',
+            ['leFormulaire' => $formAeroport->createView()]
+        );
+
+
+        // 2. Traiter le formulaire
+
+    }
+
+
+
+
     
 }
