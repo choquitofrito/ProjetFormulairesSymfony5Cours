@@ -28,9 +28,14 @@ class ExempleUploadController extends AbstractController
         );
 
         $formulairePays->handleRequest($request);
-
         
         if ($formulairePays->isSubmitted() && $formulairePays->isValid()){
+        
+
+            dump ($pays);
+        $pays = $formulairePays->getData();
+        dump ($pays);
+        die();
         
             // manque getData???
 

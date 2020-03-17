@@ -98,7 +98,8 @@ class FormulairesController extends AbstractController
 
         // si submit on doit traiter le formulaire
         if ($formAeroport->isSubmitted() && $formAeroport->isValid()) {
-            $aeroport = $formAeroport->getData();
+            
+            //$aeroport = $formAeroport->getData(); // pas besoin
             return $this->render(
                 '/formulaires/aeroport_traitement_formulaire.html.twig',
                 [
