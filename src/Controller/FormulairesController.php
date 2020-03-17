@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Aeroport;
 use App\Form\AeroportType;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -77,19 +78,31 @@ class FormulairesController extends AbstractController
     /**
      * @Route ("/formulaires/aeroport/afficher/traiter", name="aeroport_afficher_traiter")
      */
-    public function aeroportAfficherTraiter (){
+    public function aeroportAfficherTraiter (Request $request){
 
         // 1. Créer et afficher le formulaire
-        // créer le formulaire        
+        // créer le formulaire    
+        $aeroport = new Aeroport();
+        //$aeroport->setNom ("SVQ");
+        //$aeroport->setCode ("435345345");
+        
         $formAeroport = $this->createForm(
             AeroportType::class,
-            null,
+            $aeroport,
             [
                 'method' => 'POST',
                 'action' => $this->generateUrl("aeroport_afficher_traiter")
 
             ]
         );
+        $formAeroport->handleRequest($request);
+
+        // si submit on doit traiter le formulaire
+        if ($formAeroport->isSubmitted() && $formAeroport->isValid()){
+            dd ($request->request);
+        }
+
+
         return $this->render(
             '/formulaires/aeroport_afficher_formulaire.html.twig',
             ['leFormulaire' => $formAeroport->createView()]

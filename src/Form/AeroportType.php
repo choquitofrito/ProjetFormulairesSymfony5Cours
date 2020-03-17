@@ -14,7 +14,7 @@ class AeroportType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('nom', TextType::class)
-            ->add('age', TextType::class);
+            ->add('code', TextType::class);
             //->add ('envoyer', SubmitType::class);  // à ne pas faire!!!
     }
 }
