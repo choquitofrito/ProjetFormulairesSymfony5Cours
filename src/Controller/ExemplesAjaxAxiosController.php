@@ -49,12 +49,12 @@ class ExemplesAjaxAxiosController extends AbstractController
 
 
     // 1. action de traitement du AJAX, on utilise les méthodes du repository (findBy, findAll, etc...)
-    // nous devons serialiser (transformer en json dans ce cas) le résultat et envoyer une Reponse normale
+    // nous devons serialiser le résultat (le transformer en json dans ce cas) et envoyer une Reponse normale
 
     /**
      * @Route("/exemples/ajax/axios/exemple/affichage/objets/traitement/repo", name="exemple_objets_traitement_repo")
      */
-    public function exempleAffichageObjetsTraitement(Request $req)
+    public function exempleAffichageObjetsTraitementRepo(Request $req)
     {
 
         $em = $this->getDoctrine()->getManager();
