@@ -16,7 +16,7 @@ btn_envoyer.addEventListener ("click", (event) => {
     event.preventDefault ();
 
     axios ({
-        url : '{{ path ("exemple_objets_traitement") }}',
+        url : '{{ path ("exemple_objets_traitement_repo") }}',
         method : 'POST',
         headers: {'Content-Type': 'multipart/form-data'},
         data: new FormData (leFormulaire)
