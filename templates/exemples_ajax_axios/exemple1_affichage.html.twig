@@ -1,6 +1,22 @@
 {% extends 'base.html.twig' %}
 
-
 {% block body %}
-Hello
+<form id="leFormulaire">
+    <input type="text" name="nom">
+    <button id="btn_envoyer" type="submit">Envoyer</button>
+</form>
+<div id="divMessage"></div>
+
 {% endblock %}
+
+{% block javascripts %}
+<script>
+
+// document.getElementById("btn_envoyer").addEventListener ()
+btn_envoyer.addEventListener ("click",function (evenement){
+    console.log ("click ok");
+});
+
+</script>
+{% endblock %}
+
