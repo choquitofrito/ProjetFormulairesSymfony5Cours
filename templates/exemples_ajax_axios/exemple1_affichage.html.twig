@@ -10,11 +10,30 @@
 {% endblock %}
 
 {% block javascripts %}
-<script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
+<script>
 // document.getElementById("btn_envoyer").addEventListener ()
 btn_envoyer.addEventListener ("click",function (evenement){
-    console.log ("click ok");
+    evenement.preventDefault();
+    // DOM Document Object Model
+    //console.log (document.getElementById ("leFormulaire"));
+    
+    axios({
+        url: '{{ path ("exemple1_traitement") }}', // url : '/exemples/ajax/axios/exemple1/traiment'
+        method: 'POST',
+        headers: {'Content-Type': 'multipart/form-data'},
+        data: new FormData (leFormulaire)
+    })
+    .then (function (response){
+        //console.log (response); // la totalité de la reponse
+        //console.log (response.data); // uniquement les données de la reponse
+        //console.log (response.data.nom);
+        divMessage.innerHTML = "Bonjour " + response.data.nom;
+    })
+    .catch (function (error){
+        console.log (error);
+    });
 });
 
 </script>
